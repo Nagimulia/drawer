@@ -13,7 +13,7 @@ void main() async {
   // register adapters
   Hive.registerAdapter(OffsetCustomAdapter());
   Hive.registerAdapter(StrokeAdapter());
-  await Hive.openBox<Map<String, dynamic>>('drawings');
+  await Hive.openBox<Map<dynamic, dynamic>>('drawings');
 
   runApp(const MyApp());
 }

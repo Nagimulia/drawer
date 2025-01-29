@@ -10,7 +10,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late Box<Map<String, dynamic>> _drawingBox;
+  late Box<Map<dynamic, dynamic>> _drawingBox;
 
   @override
   void initState() {
@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _initializeHive() async {
-    _drawingBox = Hive.box<Map<String, dynamic>>('drawings');
+    _drawingBox = Hive.box<Map<dynamic, dynamic>>('drawings');
 
     setState(() {});
   }
@@ -85,9 +85,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            Image.memory(
-                              thumbnail,
-                              fit: BoxFit.cover,
+                            Expanded(
+                              child: Image.memory(
+                                thumbnail,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                             Padding(
                               padding: EdgeInsets.all(5),
@@ -115,8 +117,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               }),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/draw');
+        onPressed: () async {
+          await Navigator.pushNamed(context, '/draw');
+          setState(() {});
         },
         child: Icon(Icons.draw),
       ),

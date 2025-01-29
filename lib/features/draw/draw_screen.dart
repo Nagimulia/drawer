@@ -17,7 +17,7 @@ class _DrawScreenState extends State<DrawScreen> {
   List<Offset> _currentPoints = [];
   Color _selectedColor = Colors.black;
   double _brushSize = 4.0;
-  late Box<Map<String, dynamic>> _drawingBox;
+  late Box<Map<dynamic, dynamic>> _drawingBox;
 
   String? _drawingName;
 
@@ -30,7 +30,7 @@ class _DrawScreenState extends State<DrawScreen> {
   }
 
   Future<void> _initializeHive() async {
-    _drawingBox = Hive.box<Map<String, dynamic>>('drawings');
+    _drawingBox = Hive.box<Map<dynamic, dynamic>>('drawings');
 
     final name = ModalRoute.of(context)?.settings.arguments as String?;
     if (name != null) {
